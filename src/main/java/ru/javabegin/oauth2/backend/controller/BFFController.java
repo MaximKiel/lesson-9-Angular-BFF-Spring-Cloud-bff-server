@@ -201,7 +201,8 @@ public class BFFController {
 
         // чтобы корректно выполнить GET запрос с параметрами - применяем класс UriComponentsBuilder
         String urlTemplate = UriComponentsBuilder.fromHttpUrl(keyCloakURI + "/logout")
-                .queryParam("post_logout_redirect_uri", "{post_logout_redirect_uri}")
+//                Убрал параметр из запроса, чтобы метод отрабатывал корректно
+//                .queryParam("post_logout_redirect_uri", "{post_logout_redirect_uri}")
                 .queryParam("id_token_hint", "{id_token_hint}")
                 .queryParam("client_id", "{client_id}")
                 .encode()
@@ -209,7 +210,7 @@ public class BFFController {
 
         // конкретные значения, которые будут подставлены в параметры GET запроса
         Map<String, String> params = new HashMap<>();
-        params.put("post_logout_redirect_uri", clientURL); // может быть любым, т.к. frontend получает ответ от BFF, а не напрямую от Auth Server
+//        params.put("post_logout_redirect_uri", clientURL); // может быть любым, т.к. frontend получает ответ от BFF, а не напрямую от Auth Server
         params.put("id_token_hint", idToken); // idToken указывает Auth Server, для кого мы хотим "выйти"
         params.put("client_id", clientId);
 
